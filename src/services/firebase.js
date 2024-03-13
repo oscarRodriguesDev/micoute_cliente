@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, signOut,onAuthStateChanged} from "firebase/auth";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyAj1pIq3lyEprzCZgsokUu0Ups9W2f8aMA",
   authDomain: "micouch.firebaseapp.com",
@@ -10,14 +12,17 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth =  getAuth()
+export var usuario = null;
+
 //preciso tipar emailo e senha
 
 export async function logar(email, senha) {
- 
+
     try {
       // Tente fazer login com o email e senha fornecidos
       await signInWithEmailAndPassword(auth, email, senha);
      alert("Login bem-sucedido!");
+
     } catch (error) {
       // Em caso de erro, imprima o erro no console
       alert(`não logou com: ${email} e ${senha} informados`);
@@ -28,15 +33,18 @@ export async function logar(email, senha) {
 
   //faz logout do usuario
   export async function deslogar() {
+    var logado =  false
     try {
       // Tente fazer logout
       await signOut(auth);
-      alert("Logout bem-sucedido!");
+      alert('usuario deslogou')
+    logado = true
     } catch (error) {
       // Em caso de erro, imprima o erro no console
      alert("Erro ao fazer logout:", error);
       throw error; // você pode tratar esse erro em outros lugares se necessário
     }
+    return logado
   }
   
 
@@ -47,14 +55,12 @@ export async function logar(email, senha) {
 
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          alert('logged ' +user.email)
-          console.log(user.getIdToken);
-        } else {
-          // O usuário não está autenticado
-
+          usuario = user.email
+    
         }
       });
     }catch(error){
+
         console.log(error)
     }
   }

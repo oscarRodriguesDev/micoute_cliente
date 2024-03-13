@@ -1,8 +1,10 @@
 
-import { logar,deslogar,getState } from '../../services/firebase';
+import { logar,deslogar,getState,usuario } from '../../services/firebase';
 import React, { useState } from 'react';
-import styles from './styles.module.scss'; // Certifique-se de ter o arquivo CSS para estilização
-import { get } from 'http';
+import styles from './styles.module.scss'; 
+import { useRouter } from "next/router";
+
+
 const Login: React.FC = () => {
 
     interface State {
@@ -11,16 +13,17 @@ const Login: React.FC = () => {
 
   const [email, setEmail] = useState<string>('');
   const [senha, setSenha] = useState<string>('');
-  const [user , serUser] = useState(''); // Tipando explicitamente logado como boolean
+  const [user , serUser] = useState(''); 
 
   const entrar = async () => {
     try {
-     await logar(email,senha)
+   await logar(email,senha)
+    
      setEmail('')
      setSenha('')
     
     } catch (error) {
-       
+       console.log(error)
         setSenha('')
     }
   };
@@ -41,6 +44,14 @@ const  verificarLogin = async ()=>{
  await getState()
 }
 verificarLogin()
+if(!usuario){
+ 
+}else{
+ 
+  const router = useRouter();
+  router.push('/fit'); 
+
+}
 
 
   return (

@@ -1,7 +1,7 @@
 
   
-  const perguntasData=[]
-   /*  { texto: 'Estamos abertos a contribuições criativas entre nossos colaboradores?', porcentagem: 2.08 },
+  const perguntasData=[
+   { texto: 'Estamos abertos a contribuições criativas entre nossos colaboradores?', porcentagem: 2.08 },
     { texto: 'Quão comprometido estamos em desenvolver pessoas continuamente?', porcentagem: 2.08 },
     { texto: 'Quão importante são as iniciativas de bem-estar na organização?', porcentagem: 2.08 },
     { texto: 'Há eventos regulares que promovem a interação entre os funcionários?', porcentagem: 2.08 },
@@ -46,6 +46,6 @@
     { texto: 'Quão estamos envolvidos em questões de SUSTENTABILIDADE e apoio a comunidades globais?', porcentagem: 3.12 },
     { texto: 'Nossas ideias estão alinhadas aos dos nossos colaboradores?', porcentagem: 3.12 },
   ];
-   */
+  
   export default perguntasData;
   
