@@ -33,6 +33,7 @@ const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
             {perguntas.map((pergunta, index) => (
               <div key={index}>
                 <label>{pergunta.texto}</label>
+                <label>0</label>
                 <input type="range" name={pergunta.texto} />
               </div>
             ))}
@@ -40,6 +41,9 @@ const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
          
           </div>
         ))}
+
+        <div className={styles.painel}>
+
          <input type='button' value='NEXT' onClick={() => {
         if (categoriaAtual < Object.keys(perguntasData).length - 1) {
           setCategoriaAtual(categoriaAtual + 1);
@@ -50,6 +54,8 @@ const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
           setCategoriaAtual(categoriaAtual - 1);
         }
       }}/>
+
+        </div>
       </form>
      
     </div>
