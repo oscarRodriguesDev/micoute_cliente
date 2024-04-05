@@ -1,6 +1,8 @@
 import React, { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import perguntasData from "@/teste_perfis/fit_cultural";
+import { documentId } from "firebase/firestore";
+
 
 const Cadastro = () => {
 
@@ -12,14 +14,21 @@ const [estabilidade,setEstabilidade] =  useState([])
 const [ordem,setOrdem] =  useState([])
 const [acolhimento,setAcolhimento] =  useState([])
 const [proposito,setProposito] =  useState([])
+const [index,setIndex] = useState(0)
+const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
 
-
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (categoriaAtual < Object.keys(perguntasData).length - 1) {
+      setCategoriaAtual(categoriaAtual + 1);
+    }
+  };
 
   return (
     <div className={styles.container}>
-      <form action='POST' onSubmit={()=>{console.log('enviar para o banco')}}>
-        {Object.entries(perguntasData).map(([categoria, perguntas]) => (
-          <div key={categoria}>
+      <form action='POST' onSubmit={handleSubmit}>
+        {Object.entries(perguntasData).map(([categoria, perguntas], index) => (
+          <div className={styles.categoria} id={String(index)} key={categoria} style={{ display: categoriaAtual === index ? 'block' : 'none' }}>
             <h2>{categoria}</h2>
             {perguntas.map((pergunta, index) => (
               <div key={index}>
@@ -27,11 +36,22 @@ const [proposito,setProposito] =  useState([])
                 <input type="range" name={pergunta.texto} />
               </div>
             ))}
-            <button>Enviar</button>
+
+         
           </div>
         ))}
-        <input type="submit" value="Enviar" />
+         <input type='button' value='NEXT' onClick={() => {
+        if (categoriaAtual < Object.keys(perguntasData).length - 1) {
+          setCategoriaAtual(categoriaAtual + 1);
+        }
+      }}/>
+      <input type='button' value ='PREVIOUS' onClick={() => {
+        if (categoriaAtual < Object.keys(perguntasData).length - 1) {
+          setCategoriaAtual(categoriaAtual - 1);
+        }
+      }}/>
       </form>
+     
     </div>
   );
 };
