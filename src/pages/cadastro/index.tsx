@@ -1,21 +1,27 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, ChangeEvent } from "react";
 import styles from "./styles.module.scss";
 import perguntasData from "@/teste_perfis/fit_cultural";
-import { documentId } from "firebase/firestore";
 
+interface Pergunta {
+  texto: string;
+}
 
 const Cadastro = () => {
+  const [categorias, setCategorias] = useState<{ [key: string]: number }[]>([]);
+  const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
+  const  [inovacao,setInovacao]= useState([])
+  var lista = []
 
-const [inovacao,setInovao] =  useState([])
-const [autonomia,setAutonomia] =  useState([])
-const [competicao,setCompeticao] =  useState([])
-const [meritocracia,setMeritocracia] =  useState([])
-const [estabilidade,setEstabilidade] =  useState([])
-const [ordem,setOrdem] =  useState([])
-const [acolhimento,setAcolhimento] =  useState([])
-const [proposito,setProposito] =  useState([])
-const [index,setIndex] = useState(0)
-const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    const novoValor: number = parseInt(e.target.value, 10);
+    const novasCategorias = [...categorias];
+    novasCategorias[categoriaAtual] = {
+      ...novasCategorias[categoriaAtual],
+      [index]: novoValor,
+    };
+    setCategorias(novasCategorias);
+  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,40 +30,69 @@ const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
     }
   };
 
+  const renderizarPerguntas = () => {
+    return Object.entries(perguntasData).map(
+      ([categoria, perguntas], index) => (
+        <div
+          className={styles.categoria}
+          id={String(index)}
+          key={categoria}
+          style={{ display: categoriaAtual === index ? "block" : "none" }}
+        >
+          <h2 className={styles.title_categoria}>{categoria}</h2>
+          {perguntas.map((pergunta: Pergunta, index: number) => (
+            <div className={styles.boxQuestion} key={index}>
+              <label className={styles.text_question}>{pergunta.texto}</label>
+              <label className={styles.indicator}>
+                {categorias[categoriaAtual]?.[index] ?? 0}
+              </label>
+              <input
+                className={styles.slider}
+                type="range"
+                name={pergunta.texto}
+                max={10}
+                min={0}
+                value={categorias[categoriaAtual]?.[index] || 0}
+                onChange={(e) => handleChange(e, index)}
+              />
+            </div>
+          ))}
+        </div>
+      )
+    );
+  };
+
   return (
     <div className={styles.container}>
-      <form action='POST' onSubmit={handleSubmit}>
-        {Object.entries(perguntasData).map(([categoria, perguntas], index) => (
-          <div className={styles.categoria} id={String(index)} key={categoria} style={{ display: categoriaAtual === index ? 'block' : 'none' }}>
-            <h2>{categoria}</h2>
-            {perguntas.map((pergunta, index) => (
-              <div key={index}>
-                <label>{pergunta.texto}</label>
-                <label>0</label>
-                <input type="range" name={pergunta.texto} />
-              </div>
-            ))}
-
-         
-          </div>
-        ))}
+      <form action="POST" onSubmit={handleSubmit}>
+        {renderizarPerguntas()}
 
         <div className={styles.painel}>
-
-         <input type='button' value='NEXT' onClick={() => {
-        if (categoriaAtual < Object.keys(perguntasData).length - 1) {
-          setCategoriaAtual(categoriaAtual + 1);
-        }
-      }}/>
-      <input type='button' value ='PREVIOUS' onClick={() => {
-        if (categoriaAtual < Object.keys(perguntasData).length - 1) {
-          setCategoriaAtual(categoriaAtual - 1);
-        }
-      }}/>
-
+          <input
+            type="button"
+            value="NEXT"
+            onClick={() => {
+              if (categoriaAtual < Object.keys(perguntasData).length - 1) {
+                setCategoriaAtual(categoriaAtual + 1);
+                 switch(categoriaAtual){
+                  case 0:
+                    setInovacao()
+                 }
+               
+              }
+            }}
+          />
+          <input
+            type="button"
+            value="PREVIOUS"
+            onClick={() => {
+              if (categoriaAtual > 0) {
+                setCategoriaAtual(categoriaAtual - 1);
+              }
+            }}
+          />
         </div>
       </form>
-     
     </div>
   );
 };

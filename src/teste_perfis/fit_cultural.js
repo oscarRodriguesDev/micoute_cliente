@@ -1,12 +1,13 @@
 
   
   const perguntasData={
-  'INOVAÇÃO': [{ texto: 'Estamos abertos a contribuições criativas entre nossos colaboradores?', porcentagem: 2.08 },
+  'INOVAÇÃO': [{ texto: 'Estamos abertos a contribuições criativas entre nossos colaboradores?', porcentagem: 2.08, },
     { texto: 'Quão comprometido estamos em desenvolver pessoas continuamente?', porcentagem: 2.08 },
     { texto: 'Quão importante são as iniciativas de bem-estar na organização?', porcentagem: 2.08 },
     { texto: 'Há eventos regulares que promovem a interação entre os funcionários?', porcentagem: 2.08 },
     { texto: 'A cultura organizacional é flexível o suficiente para se adaptar a novos desafios?', porcentagem: 2.08 },
-    { texto: 'Os erros são vistos como oportunidades de aprendizado?', porcentagem: 2.08 }],
+    { texto: 'Os erros são vistos como oportunidades de aprendizado?', porcentagem: 2.08 },
+    ],
   
    'AUTONOMIA': [{ texto: 'Quão comprometido estamos em promover um ambiente de aprendizado mutuo?', porcentagem: 2.5 },
     { texto: 'Quão disposto estamos para incorporar elementos de diversão nas jornadas de trabalho para torna-la mais agradável?', porcentagem: 2.5 },
