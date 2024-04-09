@@ -6,12 +6,19 @@ interface Pergunta {
   texto: string;
 }
 
+interface Elemento {
+  propriedade: string;
+  outraPropriedade: number;
+}
+
+const lista: Elemento[] = [];
+
+
 const Cadastro = () => {
   const [categorias, setCategorias] = useState<{ [key: string]: number }[]>([]);
   const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
-  const  [inovacao,setInovacao]= useState([])
-  var lista = []
-
+  const [inovacao, setInovacao] = useState([]);
+ 
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const novoValor: number = parseInt(e.target.value, 10);
@@ -19,6 +26,8 @@ const Cadastro = () => {
     novasCategorias[categoriaAtual] = {
       ...novasCategorias[categoriaAtual],
       [index]: novoValor,
+    
+     
     };
     setCategorias(novasCategorias);
   };
@@ -27,6 +36,7 @@ const Cadastro = () => {
     e.preventDefault();
     if (categoriaAtual < Object.keys(perguntasData).length - 1) {
       setCategoriaAtual(categoriaAtual + 1);
+     
     }
   };
 
@@ -53,8 +63,11 @@ const Cadastro = () => {
                 max={10}
                 min={0}
                 value={categorias[categoriaAtual]?.[index] || 0}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => {handleChange(e, index)
+                  lista.push(Number(e.target.value))
+                }}
               />
+            
             </div>
           ))}
         </div>
@@ -74,11 +87,16 @@ const Cadastro = () => {
             onClick={() => {
               if (categoriaAtual < Object.keys(perguntasData).length - 1) {
                 setCategoriaAtual(categoriaAtual + 1);
-                 switch(categoriaAtual){
+                switch (categoriaAtual) {
                   case 0:
-                    setInovacao()
-                 }
-               
+                    // Tipagem da função setInovacao
+                    const setInovacao: React.Dispatch<
+                      React.SetStateAction<Elemento[]>
+                    > = (lista) => {
+                      // Lógica para atualizar o estado inovacao
+                    };
+                    console.log(inovacao)
+                }
               }
             }}
           />
