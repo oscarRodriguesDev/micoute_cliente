@@ -2,12 +2,24 @@ import React, { FormEvent, useState, ChangeEvent } from "react";
 import styles from "./styles.module.scss";
 import perguntasData from "@/teste_perfis/fit_cultural";
 
+
 interface Pergunta {
   texto: string;
 }
 
 interface Resposta {
   [index: number]: number;
+}
+
+interface CategoriaArrays {
+  cat1: number[];
+  cat2: number[];
+  cat3: number[];
+  cat4: number[];
+  cat5: number[];
+  cat6: number[];
+  cat7: number[];
+  cat8: number[];
 }
 
 const Cadastro = () => {
@@ -17,7 +29,33 @@ const Cadastro = () => {
     number[][]
   >([]);
   const [mostrarEnviarTeste, setMostrarEnviarTeste] = useState<boolean>(false);
-  const [mostrarNext,setMostrarNext] = useState<boolean>(true);
+  const [mostrarNext, setMostrarNext] = useState<boolean>(true);
+
+
+  //função para recuperar os nome da empresa 
+  const loadName = (): FormData | null => {
+    const data = localStorage.getItem('formData');
+    if (data) {
+      let dado =  JSON.parse(data);
+      return dado.companyName
+
+    }
+    return null;
+  };
+  
+  //função para recuperar os email da empresa 
+  const loadEmail = (): FormData | null => {
+    const data = localStorage.getItem('formData');
+    if (data) {
+      let dado =  JSON.parse(data);
+      return dado.email 
+
+    }
+    return null;
+  };
+  
+
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const novoValor: number = parseInt(e.target.value, 10);
@@ -31,31 +69,67 @@ const Cadastro = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (categoriaAtual < Object.keys(perguntasData).length - 1) {
+    if (categoriaAtual <= Object.keys(perguntasData).length - 1) {
       setCategoriaAtual(categoriaAtual + 1);
     }
   };
 
   const handleNextClick = () => {
     const respostasAtualizadas = [...respostasPorCategoria];
-    if (categoriaAtual < Object.keys(perguntasData).length -1) {
+    if (categoriaAtual < Object.keys(perguntasData).length) {
       respostasAtualizadas[categoriaAtual] = Object.values(
         categorias[categoriaAtual]
       );
       setCategoriaAtual(categoriaAtual + 1);
       setRespostasPorCategoria(respostasAtualizadas);
-    }else{
+    } else {
       setMostrarEnviarTeste(true);
-      setMostrarNext(false)
- 
-    
+      setMostrarNext(false);
     }
-    console.log(respostasAtualizadas)
   };
 
   const handlePreviousClick = () => {
     if (categoriaAtual > 0) {
       setCategoriaAtual(categoriaAtual - 1);
+    }
+  };
+
+  //envia a requisição para a api
+  const handlesendResponse = async () => {
+    var nome = loadName()
+    var email = loadEmail()
+    try {
+      const response = await fetch(
+        "http://localhost:3001/rh/perfil/empresa/fitcultural",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user:nome,
+            web:email,
+            cat1: respostasPorCategoria[0],
+            cat2: respostasPorCategoria[1],
+            cat3: respostasPorCategoria[2],
+            cat4: respostasPorCategoria[3],
+            cat5: respostasPorCategoria[4],
+            cat6: respostasPorCategoria[5],
+            cat7: respostasPorCategoria[6],
+            cat8: respostasPorCategoria[7],
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(respostasPorCategoria);
+        alert("Dados enviados com sucesso");
+      } else {
+        throw new Error("Erro ao enviar requisição para a API");
+      }
+    } catch (error) {
+      console.error("Erro ou tentar processar requisição");
     }
   };
 
@@ -93,13 +167,30 @@ const Cadastro = () => {
 
   return (
     <div className={styles.container}>
-      <form action="POST" onSubmit={handleSubmit}>
+        <form action="POST" onSubmit={handleSubmit}>
         {renderizarPerguntas()}
         <div className={styles.painel}>
-          {mostrarNext&&<input type="button" value="NEXT" onClick={handleNextClick} />}
-         {mostrarNext&& <input type="button" value="PREVIOUS" onClick={handlePreviousClick} />}
-          {mostrarEnviarTeste && <input type="button" value="Enviar Teste"/>}
+          {mostrarNext && (
+            <input type="button" value="NEXT" onClick={handleNextClick} />
+          )}
+          {mostrarNext && (
+            <input
+              type="button"
+              value="PREVIOUS"
+              onClick={handlePreviousClick}
+            />
+          )}
+          {mostrarEnviarTeste && (
+            <input
+              type="button"
+              value="Enviar Teste"
+              onClick={handlesendResponse}
+            />
+          )}
         </div>
+        
+       
+        
       </form>
     </div>
   );

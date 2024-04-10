@@ -82,6 +82,7 @@ if(!usuario){
         <button type="submit" onClick={()=>{entrar()}}>Login</button>
         <button type="button" onClick={()=> {exit()}}>sair</button>
       </form>
+       <p>Não possui conta? <a href="/acessCreate">Cadastre-se agora!</a></p>
     </div>
   );
 };
