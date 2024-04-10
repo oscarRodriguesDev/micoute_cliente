@@ -125,6 +125,7 @@ const Cadastro = () => {
         const data = await response.json();
         console.log(respostasPorCategoria);
         alert("Dados enviados com sucesso");
+        location.reload() //recarregar a pagina
       } else {
         throw new Error("Erro ao enviar requisição para a API");
       }

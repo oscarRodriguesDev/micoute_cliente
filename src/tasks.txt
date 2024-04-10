@@ -1,0 +1,24 @@
+-Não criar cadastros com valores nulos e ou vazios
+-validar igualdade das senhas na verificação
+-criar os eventos para a escolha do tipo de usuário
+-salvar as opções na memoria do navegador para que possa ser utilizada para 
+definir o tipo de usuario que estarpa fazendo cadastro
+-criar o usuario no banco quando ele se cadastrar, assim será possivel criar o login para o usuario no firebase auth
+** para pensar, podemos capturar os dados do usuário para que forme o banco de talentos, a saber apenas os dados necessarios
+
+//na tela de cadastros:
+precisa tratar o erro de quando tenta enviar a primeia resposta vazia (isso acontece em todas as categorias)
+//preciso tirar a tela que mostra next mesmo após o fim das categorias esta isso é um bug
+melhorar o layout de todo os componentes elementos criados até então
+
+//politica de uso de dados no meu site
+//landing page da solução, com opção de login
+
+//o usuaario só pode ter acesso a tela dos testes caso esteja cadastrado no sistema, caso não esteja ele 
+deve visualizar uma pagina de erros, dessa forma tambem impeço o caminnho de volta pelas paginas navegadas
+
+//começar a pensar nas telas dashboards de comparação de fit cultural entre candidatos e empresas
+
+
+
+
