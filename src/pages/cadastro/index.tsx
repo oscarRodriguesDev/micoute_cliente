@@ -6,19 +6,18 @@ interface Pergunta {
   texto: string;
 }
 
-interface Elemento {
-  propriedade: string;
-  outraPropriedade: number;
+interface Resposta {
+  [index: number]: number;
 }
 
-const lista: Elemento[] = [];
-
-
 const Cadastro = () => {
-  const [categorias, setCategorias] = useState<{ [key: string]: number }[]>([]);
+  const [categorias, setCategorias] = useState<Resposta[]>([]);
   const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
-  const [inovacao, setInovacao] = useState([]);
- 
+  const [respostasPorCategoria, setRespostasPorCategoria] = useState<
+    number[][]
+  >([]);
+  const [mostrarEnviarTeste, setMostrarEnviarTeste] = useState<boolean>(false);
+  const [mostrarNext,setMostrarNext] = useState<boolean>(true);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const novoValor: number = parseInt(e.target.value, 10);
@@ -26,8 +25,6 @@ const Cadastro = () => {
     novasCategorias[categoriaAtual] = {
       ...novasCategorias[categoriaAtual],
       [index]: novoValor,
-    
-     
     };
     setCategorias(novasCategorias);
   };
@@ -36,7 +33,29 @@ const Cadastro = () => {
     e.preventDefault();
     if (categoriaAtual < Object.keys(perguntasData).length - 1) {
       setCategoriaAtual(categoriaAtual + 1);
-     
+    }
+  };
+
+  const handleNextClick = () => {
+    const respostasAtualizadas = [...respostasPorCategoria];
+    if (categoriaAtual < Object.keys(perguntasData).length -1) {
+      respostasAtualizadas[categoriaAtual] = Object.values(
+        categorias[categoriaAtual]
+      );
+      setCategoriaAtual(categoriaAtual + 1);
+      setRespostasPorCategoria(respostasAtualizadas);
+    }else{
+      setMostrarEnviarTeste(true);
+      setMostrarNext(false)
+ 
+    
+    }
+    console.log(respostasAtualizadas)
+  };
+
+  const handlePreviousClick = () => {
+    if (categoriaAtual > 0) {
+      setCategoriaAtual(categoriaAtual - 1);
     }
   };
 
@@ -63,11 +82,8 @@ const Cadastro = () => {
                 max={10}
                 min={0}
                 value={categorias[categoriaAtual]?.[index] || 0}
-                onChange={(e) => {handleChange(e, index)
-                  lista.push(Number(e.target.value))
-                }}
+                onChange={(e) => handleChange(e, index)}
               />
-            
             </div>
           ))}
         </div>
@@ -79,36 +95,10 @@ const Cadastro = () => {
     <div className={styles.container}>
       <form action="POST" onSubmit={handleSubmit}>
         {renderizarPerguntas()}
-
         <div className={styles.painel}>
-          <input
-            type="button"
-            value="NEXT"
-            onClick={() => {
-              if (categoriaAtual < Object.keys(perguntasData).length - 1) {
-                setCategoriaAtual(categoriaAtual + 1);
-                switch (categoriaAtual) {
-                  case 0:
-                    // Tipagem da função setInovacao
-                    const setInovacao: React.Dispatch<
-                      React.SetStateAction<Elemento[]>
-                    > = (lista) => {
-                      // Lógica para atualizar o estado inovacao
-                    };
-                    console.log(inovacao)
-                }
-              }
-            }}
-          />
-          <input
-            type="button"
-            value="PREVIOUS"
-            onClick={() => {
-              if (categoriaAtual > 0) {
-                setCategoriaAtual(categoriaAtual - 1);
-              }
-            }}
-          />
+          {mostrarNext&&<input type="button" value="NEXT" onClick={handleNextClick} />}
+         {mostrarNext&& <input type="button" value="PREVIOUS" onClick={handlePreviousClick} />}
+          {mostrarEnviarTeste && <input type="button" value="Enviar Teste"/>}
         </div>
       </form>
     </div>

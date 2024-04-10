@@ -1,5 +1,6 @@
 
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -7,7 +8,13 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <>
-   <h1>MICOUTE-CLIENT PROJETCT</h1>
+     <div>
+        <Link href={'/login'}>
+         Ir para login
+        </Link>
+   
+  
+     </div>
     </>
   );
 }
