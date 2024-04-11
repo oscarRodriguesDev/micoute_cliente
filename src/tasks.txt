@@ -1,33 +1,30 @@
--Não criar cadastros com valores nulos e ou vazios ok
--validar igualdade das senhas na verificação ok
--criar os eventos para a escolha do tipo de usuário e personalizar as perguntas de acordo com o usuario
--salvar as opções na memoria do navegador para que possa ser utilizada para 
-definir o tipo de usuario que estarpa fazendo cadastro
 -criar o usuario no banco quando ele se cadastrar, assim será possivel criar o login para o usuario no firebase auth
+
+//logar automaticamente o usuario quando ele se cadastrar, para isso acredito que vou precisar de um 
+rotulo no bd que informe se o usuario fez o teste ou não, pois o usuario pode se cdastrar e não realizar o teste no mesmo momento
+e obrigatorio que o sistema se lembre dele
+
 ** para pensar, podemos capturar os dados do usuário para que forme o banco de talentos, a saber apenas os dados necessarios
-** uma forma de começar a pensar nisso e coletar os dados de usuario diferente dos da empresa, assim sendo,
-criarei uma interface diferente para o usuario e para empresa:
--no caso de pessoa fisica recolher os seguintes dados:
-nome,
-telefone,
-cep,
-email,
-idade,
-sexo,
-testes-realizados:{}
 
-//na tela de cadastros:
-precisa tratar o erro de quando tenta enviar a primeia resposta vazia (isso acontece em todas as categorias)
+//criar rota na api para armazenar os dados do usuario
+
+
 //preciso tirar a tela que mostra next mesmo após o fim das categorias esta isso é um bug
-melhorar o layout de todo os componentes elementos criados até então
 
-//politica de uso de dados no meu site
+//melhorar o layout de todo os componentes elementos criados até então
+
+//politica de uso de dados do site
+
 //landing page da solução, com opção de login
 
 //o usuaario só pode ter acesso a tela dos testes caso esteja cadastrado no sistema, caso não esteja ele 
-deve visualizar uma pagina de erros, dessa forma tambem impeço o caminnho de volta pelas paginas navegadas
+deve visualizar uma pagina de erros, dessa forma tambem impeço o caminho de volta pelas paginas navegadas
 
 //começar a pensar nas telas dashboards de comparação de fit cultural entre candidatos e empresas
+
+//modificar todos os alertas para o toast
+
+//melhorar a segurança do acesso ao banco de dados, arquivo .env para a chave do firebase e outras que necessitar
 
 
 

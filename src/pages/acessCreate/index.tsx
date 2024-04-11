@@ -4,12 +4,14 @@ import styles from './styles.module.scss';
 interface FormData {
   companyName: string;
   email: string;
+  tipoUser:string;
 }
 const Account: React.FC = () => {
   // Estado local para armazenar os dados do formulário
   const [formData, setFormData] = useState<FormData>({
     companyName: '',
-    email: ''
+    email: '',
+    tipoUser:''
   });
 
   // Estado para rastrear qual opção está selecionada
@@ -22,9 +24,6 @@ const Account: React.FC = () => {
 
 
   //opção para cadastro em banco de talentos
-
-
-
   const OptionPeople: React.FC = () => {
     return (
       <div className={styles.persona}>
@@ -41,19 +40,10 @@ const Account: React.FC = () => {
   };
 
 
-
-  //verifica a igualdade de senhas
-  const comparePass=()=>{
-    if(senha==verification){
-      setStatus(true)
-    }
-  }
-
-
-
     // Função para lidar com a mudança de seleção
     const handleTipoUsuarioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setTipoUsuario(e.target.value);
+      formData.tipoUser =  tipoUsuario
       if(tipoUsuario=='pessoa'){
         setPlace('Qual o nome da sua Empresa')
       }else{
@@ -75,19 +65,24 @@ const Account: React.FC = () => {
   // Função para lidar com o envio do formulário
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-      if(status){
-        localStorage.setItem('formData', JSON.stringify(formData));
-        toast.success('Nova empresa cadastrada com sucesso')
-        //criar o login quando estiver ativo
+    if(senha==verification){
+      
+      localStorage.setItem('formData', JSON.stringify(formData));
+      toast.success('Nova empresa cadastrada com sucesso')
+      if(tipoUsuario=='empresa'){
         window.location.href = '/cadastro';
       }else{
-        toast.warning('Senhas digitadas precisam ser iguais')
-        setVerification('')
-
+        window.location.href = '/cadastro2';
       }
+    }else{
+      toast.warning('AS senhas não coincidem')
+      setVerification('')
+    }
+    };
+   
      
    
-  };
+  
   return (
     <div className={styles.container}>
 
@@ -137,7 +132,7 @@ const Account: React.FC = () => {
 
       
         <input
-          type="password"
+          type="text"
           name="password"
           placeholder="********"
           required
@@ -149,24 +144,19 @@ const Account: React.FC = () => {
           }}
         />
         <input
-          type="password"
+          type="text"
           name="confirmPassword"
           placeholder="********"
           required
           value ={verification}
           onFocus={(e)=>{
-            if(sizeChar<=8&&senha.length>0){
+            if(sizeChar<=8&&senha.length<0){
               toast.warning('Sua senha precisa ter no minimo 8 caracteres')
               }
           }}
           onChange={(e)=>{
             setVerification(e.target.value)
-           if(senha==verification){
-            setStatus(true)
-           }else{
-            setStatus(false)
-           }
-          {}
+           
           }}
         />
 

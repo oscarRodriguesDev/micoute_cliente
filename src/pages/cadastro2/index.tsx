@@ -1,8 +1,7 @@
 import React, { FormEvent, useState, ChangeEvent } from "react";
 import styles from "./styles.module.scss";
-import perguntasData from "@/teste_perfis/fit_cultural";
-import { Toaster,toast } from "sonner";
-
+import perguntasData from "@/teste_perfis/fit_cultural_colab";
+import { Toaster, toast } from "sonner";
 
 interface Pergunta {
   texto: string;
@@ -26,45 +25,40 @@ interface CategoriaArrays {
 const Cadastro = () => {
   const [categorias, setCategorias] = useState<Resposta[]>([]);
   const [categoriaAtual, setCategoriaAtual] = useState<number>(0);
-  const [respostasPorCategoria, setRespostasPorCategoria] = useState<number[][]>([]);
+  const [respostasPorCategoria, setRespostasPorCategoria] = useState<
+    number[][]
+  >([]);
   const [mostrarEnviarTeste, setMostrarEnviarTeste] = useState<boolean>(false);
   const [mostrarNext, setMostrarNext] = useState<boolean>(true);
 
-
-  //função para recuperar os nome da empresa 
+  //função para recuperar os nome da empresa
   const loadName = (): FormData | null => {
-    const data = localStorage.getItem('formData');
+    const data = localStorage.getItem("formData");
     if (data) {
-      let dado =  JSON.parse(data);
-      return dado.companyName
-
+      let dado = JSON.parse(data);
+      return dado.companyName;
     }
     return null;
   };
-  
-  //função para recuperar os email da empresa 
+
+  //função para recuperar os email da empresa
   const loadEmail = (): FormData | null => {
-    const data = localStorage.getItem('formData');
+    const data = localStorage.getItem("formData");
     if (data) {
-      let dado =  JSON.parse(data);
-      return dado.email 
-
+      let dado = JSON.parse(data);
+      return dado.email;
     }
     return null;
   };
-  //função para recuperar os email da empresa 
+  //função para recuperar os email da empresa
   const loadType = (): FormData | null => {
-    const data = localStorage.getItem('formData');
+    const data = localStorage.getItem("formData");
     if (data) {
-      let dado =  JSON.parse(data);
-      return dado.email 
-
+      let dado = JSON.parse(data);
+      return dado.email;
     }
     return null;
   };
-  
-
-
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const novoValor: number = parseInt(e.target.value, 10);
@@ -85,7 +79,7 @@ const Cadastro = () => {
 
   const handleNextClick = () => {
     const respostasAtualizadas = [...respostasPorCategoria];
-    try{
+    try {
       if (categoriaAtual < Object.keys(perguntasData).length) {
         respostasAtualizadas[categoriaAtual] = Object.values(
           categorias[categoriaAtual]
@@ -96,10 +90,11 @@ const Cadastro = () => {
         setMostrarEnviarTeste(true);
         setMostrarNext(false);
       }
-    }catch(error){
-           toast.warning('Ocorreu um erro ao tentar responder essa categoria,\n verifique suas respostas e tente novamente')
+    } catch (error) {
+      toast.warning(
+        "Ocorreu um erro ao tentar responder essa categoria,\n verifique suas respostas e tente novamente"
+      );
     }
-
   };
 
   const handlePreviousClick = () => {
@@ -110,8 +105,8 @@ const Cadastro = () => {
 
   //envia a requisição para a api
   const handlesendResponse = async () => {
-    var nome = loadName()
-    var email = loadEmail()
+    var nome = loadName();
+    var email = loadEmail();
     try {
       const response = await fetch(
         "http://localhost:3001/rh/perfil/empresa/fitcultural",
@@ -121,8 +116,8 @@ const Cadastro = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            user:nome,
-            web:email,
+            user: nome,
+            web: email,
             cat1: respostasPorCategoria[0],
             cat2: respostasPorCategoria[1],
             cat3: respostasPorCategoria[2],
@@ -139,7 +134,7 @@ const Cadastro = () => {
         const data = await response.json();
         console.log(respostasPorCategoria);
         alert("Dados enviados com sucesso");
-        location.reload() //recarregar a pagina
+        location.reload(); //recarregar a pagina
       } else {
         throw new Error("Erro ao enviar requisição para a API");
       }
@@ -182,8 +177,8 @@ const Cadastro = () => {
 
   return (
     <div className={styles.container}>
-      <Toaster position='top-left' richColors closeButton/>
-        <form action="POST" onSubmit={handleSubmit}>
+        <Toaster position='top-left' richColors closeButton/>
+      <form action="POST" onSubmit={handleSubmit}>
         {renderizarPerguntas()}
         <div className={styles.painel}>
           {mostrarNext && (

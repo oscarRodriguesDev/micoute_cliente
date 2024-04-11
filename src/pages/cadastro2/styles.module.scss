@@ -1,0 +1,92 @@
+.container {
+  width: 700px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    align-items: center;
+    margin: 200px auto;
+    border-radius: 5px;
+    border:2px solid #00000045;
+    border-radius: 5px;
+
+    .text_question{
+    margin:0 5%;
+    font-size: 18px;
+    font-weight: 600;
+   
+    }
+
+    .title_categoria {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 36px;
+    }
+
+    .indicator {
+      color: rgba(151, 79, 12, 0.745);
+      margin: 50%;
+      font-weight: 700;
+      font-size: 20px;
+      
+    }
+
+    .painel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 80%;
+
+      input[type='button']{
+        width: 150px;
+        height:30px;
+        background-color: #fffffffa;
+        box-shadow: inset 2px -2px 5px #00000091;
+        margin-top: 2px;
+        margin-bottom: 10px;
+      }
+   
+
+    }
+  }
+  /* Adicione estas regras ao seu arquivo de estilo styles.module.scss */
+
+.slider {
+  /* Estilo padrão do range */
+  -webkit-appearance: none; /* Remove o estilo padrão do WebKit */
+  margin:15px 10%
+  ;
+  appearance: none; /* Remove o estilo padrão */
+  width: 80%; /* Largura total */
+  height: 5px; /* Altura */
+  background: #68683d93; /* Cor de fundo */
+  border-radius: 5px; /* Bordas arredondadas */
+  outline: none; /* Remove o contorno padrão */
+  /* Estilo do controle deslizante */
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove o estilo padrão do WebKit */
+    appearance: none; /* Remove o estilo padrão */
+    width: 20px; /* Largura */
+    height: 20px; /* Altura */
+    background: #b93737d4; /* Cor de fundo */
+    border-radius: 50%; /* Forma do botão */
+    cursor: pointer; /* Cursor de ponteiro */
+  }
+  &::-moz-range-thumb {
+    width: 20px; /* Largura */
+    height: 20px; /* Altura */
+    background: #b93737d4;; /* Cor de fundo */
+    border-radius: 50%; /* Forma do botão */
+    cursor: pointer; /* Cursor de ponteiro */
+  }
+  &::-ms-thumb {
+    width: 20px; /* Largura */
+    height: 20px; /* Altura */
+    background: #b93737d4;; /* Cor de fundo */
+    border-radius: 50%; /* Forma do botão */
+    cursor: pointer; /* Cursor de ponteiro */
+  }
+}
+
+}
