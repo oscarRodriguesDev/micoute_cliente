@@ -1,10 +1,20 @@
--Não criar cadastros com valores nulos e ou vazios
--validar igualdade das senhas na verificação
--criar os eventos para a escolha do tipo de usuário
+-Não criar cadastros com valores nulos e ou vazios ok
+-validar igualdade das senhas na verificação ok
+-criar os eventos para a escolha do tipo de usuário e personalizar as perguntas de acordo com o usuario
 -salvar as opções na memoria do navegador para que possa ser utilizada para 
 definir o tipo de usuario que estarpa fazendo cadastro
 -criar o usuario no banco quando ele se cadastrar, assim será possivel criar o login para o usuario no firebase auth
 ** para pensar, podemos capturar os dados do usuário para que forme o banco de talentos, a saber apenas os dados necessarios
+** uma forma de começar a pensar nisso e coletar os dados de usuario diferente dos da empresa, assim sendo,
+criarei uma interface diferente para o usuario e para empresa:
+-no caso de pessoa fisica recolher os seguintes dados:
+nome,
+telefone,
+cep,
+email,
+idade,
+sexo,
+testes-realizados:{}
 
 //na tela de cadastros:
 precisa tratar o erro de quando tenta enviar a primeia resposta vazia (isso acontece em todas as categorias)
