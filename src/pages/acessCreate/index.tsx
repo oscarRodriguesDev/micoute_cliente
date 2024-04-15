@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Toaster, toast } from 'sonner'
 import styles from './styles.module.scss';
+import Rodape from '@/components/rodape';
 interface FormData {
   companyName: string;
   email: string;
@@ -168,6 +169,7 @@ const Account: React.FC = () => {
         }} />
       </form>
     </div>
+   
   );
 };
 export default Account;

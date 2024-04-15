@@ -26,6 +26,10 @@ deve visualizar uma pagina de erros, dessa forma tambem impeço o caminho de vol
 
 //melhorar a segurança do acesso ao banco de dados, arquivo .env para a chave do firebase e outras que necessitar
 
+//mexer na api para criação de perfil do usuario
+
+//
+
 
 
 

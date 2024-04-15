@@ -3,13 +3,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 5%;
-  max-width: 90%;
+  margin: 0 auto;
+  max-width: 100%;
 
   .titulo {
-    width: 100%;
+    width: 100vw;
     height:auto;
     text-align: center;
+
+ 
 
     h1 {
       font-size: 150px;
@@ -21,33 +23,41 @@
 
     img{
         width: 100%;
+        margin-bottom: 150px;
     }
 
   }
 
   .sobre {
+
+  width: 80%;
+
     p {
       font-size: 24px;
       line-height: 35px;
     }
   }
 
-  .testes {
-    ul {
-      border: 1px solid green;
-    }
-    li {
-      border: 1px solid red;
-    }
+
+  .testes{
+    width: 80%;
   }
 
+
   .chamada{
-    border:1px solid rgb(0, 134, 244);
-    p{
-        font-size:20px;
-    }
-    a{
-        font-size:20px;
-    }
-  }
+   width: 80%;; 
+   
 }
+.actionButton{
+  width:20%;
+  padding-top: 15px;
+  margin:5% 40%;
+  padding-bottom: 15px;
+  font-size: 22px;
+  border-radius: 7px;
+  border:none;
+  box-shadow: inset 2px -2px 5px #2a2929cd;
+  background-color: #01640ecc;
+}
+}
+

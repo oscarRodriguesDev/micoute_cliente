@@ -1,18 +1,19 @@
-import styles from '../styles/home.module.scss'
-import Image from 'next/image';
-import imgSobre from '../res/sobre.png'
+import styles from "../styles/home.module.scss";
+import Image from "next/image";
+import imgSobre from "../res/sobre.png";
+import Rodape from "@/components/rodape";
 
 const Landing = () => {
   return (
     <>
       <div className={styles.container}>
         <section className={styles.titulo}>
-          <h1>TalentMatch</h1>
-          <Image src={imgSobre} alt='fundo do titulo'/>
+          <h1>Talent Match</h1>
+          <Image src={imgSobre} alt="fundo do titulo" />
         </section>
 
         <section className={styles.sobre}>
-          <p>Bem-vindo ao TalentMatch!</p>
+          <h3>Bem-vindo ao Talent Match!</h3>
           <p>
             Encontrar o candidato perfeito para sua equipe pode ser desafiador,
             mas com o TalentMatch, a busca pelo talento ideal se torna mais
@@ -49,28 +50,32 @@ const Landing = () => {
         </section>
 
         <section className={styles.testes}>
+          <h2>Testes</h2>
           <ul>
+            <h4>DISC Assessment</h4>
             <li>
-              DISC Assessment: O DISC é um modelo de avaliação comportamental
-              que categoriza os comportamentos em quatro dimensões: Dominância,
-              Influência, Estabilidade e Conformidade. Essa avaliação ajuda a
-              entender como os candidatos se comportam em diferentes situações e
-              ambientes.
+              O DISC é um modelo de avaliação comportamental que categoriza os
+              comportamentos em quatro dimensões: Dominância, Influência,
+              Estabilidade e Conformidade. Essa avaliação ajuda a entender como
+              os candidatos se comportam em diferentes situações e ambientes.
             </li>
+            <h4>Myers-Briggs Type Indicator (MBTI)</h4>
             <li>
-              Myers-Briggs Type Indicator (MBTI): O MBTI é baseado na teoria dos
-              tipos psicológicos de Carl Jung e avalia a personalidade dos
-              candidatos em quatro dimensões: Extroversão/Introversão,
-              Sensação/Intuição, Pensamento/Sentimento e Julgamento/Percepção.
-              Ele categoriza os indivíduos em 16 tipos diferentes de
-              personalidade.
+              O MBTI é baseado na teoria dos tipos psicológicos de Carl Jung e
+              avalia a personalidade dos candidatos em quatro dimensões:
+              Extroversão/Introversão, Sensação/Intuição, Pensamento/Sentimento
+              e Julgamento/Percepção. Ele categoriza os indivíduos em 16 tipos
+              diferentes de personalidade.
             </li>
+            <h4>StrengthsFinder:</h4>
             <li>
               StrengthsFinder: O StrengthsFinder avalia os pontos fortes dos
               candidatos, identificando seus talentos naturais e habilidades
               dominantes. Ele se concentra em identificar e desenvolver os
               pontos fortes individuais de cada candidato.
             </li>
+
+            <h4>Big Five Personality Traits (OCEAN Model)</h4>
             <li>
               Big Five Personality Traits (OCEAN Model): Este modelo avalia a
               personalidade dos candidatos em cinco dimensões principais:
@@ -78,20 +83,46 @@ const Landing = () => {
               Amabilidade e Neuroticismo. Ele fornece uma visão abrangente da
               personalidade dos candidatos.
             </li>
+            <h4>Predictive Index (PI)</h4>
             <li>
-              Predictive Index (PI): O PI é uma ferramenta de avaliação
-              comportamental que mede os drives motivacionais dos candidatos e
-              suas necessidades de trabalho. Ele ajuda a identificar quais
-              candidatos são mais adequados para determinadas funções e
-              ambientes de trabalho.
+              O PI é uma ferramenta de avaliação comportamental que mede os
+              drives motivacionais dos candidatos e suas necessidades de
+              trabalho. Ele ajuda a identificar quais candidatos são mais
+              adequados para determinadas funções e ambientes de trabalho.
             </li>
+            <h4>Hogan Personality Inventory (HPI)</h4>
             <li>
-              Hogan Personality Inventory (HPI): O HPI avalia a personalidade
-              dos candidatos em relação às características que são relevantes
-              para o desempenho no local de trabalho, como ambição,
-              sociabilidade, prudência, entre outras.
+              O HPI avalia a personalidade dos candidatos em relação às
+              características que são relevantes para o desempenho no local de
+              trabalho, como ambição, sociabilidade, prudência, entre outras.
             </li>
           </ul>
+        </section>
+        <section className={styles.testemunhos}>
+          <div className={styles.testemunho}>
+            <h3>João Silva</h3>
+            <p>
+              "O TalentMatch me ajudou a encontrar a vaga dos meus sonhos. Foi
+              fácil de usar e me forneceu insights valiosos sobre minha
+              carreira. Recomendo a todos!"
+            </p>
+          </div>
+          <div className={styles.testemunho}>
+            <h3>Maria Oliveira</h3>
+            <p>
+              "Estou impressionada com a precisão dos resultados do TalentMatch.
+              Ele me ajudou a entender melhor minhas habilidades e me deu
+              confiança para buscar novas oportunidades."
+            </p>
+          </div>
+          <div className={styles.testemunho}>
+            <h3>Carlos Santos</h3>
+            <p>
+              "Nunca pensei que um teste de perfil pudesse ser tão útil. O
+              TalentMatch me mostrou exatamente onde eu me encaixo no mercado de
+              trabalho e me deu um impulso na minha busca por emprego."
+            </p>
+          </div>
         </section>
 
         <section className={styles.chamada}>
@@ -114,11 +145,13 @@ const Landing = () => {
             Realize nosso teste de perfil agora mesmo e comece a moldar seu
             futuro!
           </p>
-          <a href="/login" className="btn">
-           Cadastre-se  </a> <span> e inicie seu teste</span>
-        
+          <button className={styles.actionButton} onClick={()=>{
+            location.href='/login'
+          }}>Realizar o Fit-Cultural agora!</button>
+         
         </section>
       </div>
+      <Rodape />
     </>
   );
 };
