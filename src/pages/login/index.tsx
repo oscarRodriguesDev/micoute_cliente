@@ -1,89 +1,44 @@
-
-import { logar,deslogar,getState,usuario } from '../../services/firebase';
-import React, { useState } from 'react';
-import styles from './styles.module.scss'; 
-import { useRouter } from "next/router";
-
+import Image from "next/image";
+import { Toaster, toast } from "sonner";
+import React, { useState } from "react";
+import styles from "./styles.module.scss";
+import banner from "../../res/banner-gnt-coach.png";
+import { logar } from "@/services/firebase";
 
 const Login: React.FC = () => {
+  const [user, setUser] = useState<string>("example@email.com");
+  const [senha, setSenha] = useState<string>("");
 
-    interface State {
-        logado: boolean;
-      }
-
-  const [email, setEmail] = useState<string>('');
-  const [senha, setSenha] = useState<string>('');
-  const [user , serUser] = useState(''); 
-
-  const entrar = async () => {
-    try {
-   await logar(email,senha)
-    
-     setEmail('')
-     setSenha('')
-    
-    } catch (error) {
-       console.log(error)
-        setSenha('')
-    }
-  };
-
-  const exit= async () => {
-    try{
-        await deslogar()
-        setEmail('')
-        setSenha('')
-    }catch(error){
-        setEmail('')
-        setSenha('')
-    }
-  };
-
-// Função para verificar se o usuário está logado
-const  verificarLogin = async ()=>{
- await getState()
-}
-verificarLogin()
-if(!usuario){
- 
-}else{
- 
-  const router = useRouter();
-  router.push('/fit'); 
-
-}
-
-
+  const handleSubmit =  async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+       logar(user,senha)
+  }
   return (
-    <div className={styles.container}>
-      <h2>Login</h2>
-      <form onSubmit={(e) => { e.preventDefault() }}>
-        
-          <label htmlFor="email">Email:</label>
-          <input 
-            type="email" 
-            id="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            placeholder='example@email.com'
-            required 
-          />
-     
-        
-          <label htmlFor="password">Senha:</label>
-          <input 
-            type="password" 
-            id="password" 
-            value={senha} 
-            onChange={(e) => setSenha(e.target.value)} 
-            placeholder='••••••••••'
-            required 
-        />
-        <button type="submit" onClick={()=>{entrar()}}>Login</button>
-        <button type="button" onClick={()=> {exit()}}>sair</button>
-      </form>
-       <p>Não possui conta? <a href="/acessCreate">Cadastre-se agora!</a></p>
-    </div>
+    <>
+      <div className={styles.container}>
+        <Toaster position="top-right" richColors />
+        <section className={styles.banner}>
+          <Image src={banner} alt="banner da tela de login" />
+        </section>
+        <section className={styles.login}>
+          <div className={styles.box_login}>
+            <form onSubmit={handleSubmit}>
+              <h1>Login</h1>
+
+              <label>Digite seu usuário</label>
+              <input type="text" placeholder="gntCoach" value={user} onChange={(e) => setUser(e.target.value)} />
+              <label>Informe sua senha</label>
+              <input type="password" placeholder="•••••••••" value={senha} onChange={(e) => setSenha(e.target.value)} />
+              <button type="submit">Entrar</button>
+            </form>
+
+            <p>
+              Não possui cadastro? Cadastre-se <a href="/acessCreate">aqui</a>
+            </p>
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
 

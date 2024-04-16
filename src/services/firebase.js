@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, signOut,onAuthStateChanged} from "firebase/auth";
+import { Toaster,toast } from "sonner";
 
 
 const firebaseConfig = {
@@ -21,12 +22,12 @@ export async function logar(email, senha) {
     try {
       // Tente fazer login com o email e senha fornecidos
       await signInWithEmailAndPassword(auth, email, senha);
-     alert("Login bem-sucedido!");
+  alert("Login bem-sucedido!");
+    
 
     } catch (error) {
-      // Em caso de erro, imprima o erro no console
-      alert(`não logou com: ${email} e ${senha} informados`);
-      throw error; // você pode tratar esse erro em outros lugares se necessário
+    alert('Parece que algum valor informado não esta correto')
+    
     }
   }
 
@@ -37,11 +38,11 @@ export async function logar(email, senha) {
     try {
       // Tente fazer logout
       await signOut(auth);
-      alert('usuario deslogou')
+      toast.success('usuario deslogou')
     logado = true
     } catch (error) {
       // Em caso de erro, imprima o erro no console
-     alert("Erro ao fazer logout:", error);
+     toast.error("Erro ao fazer logout:", error);
       throw error; // você pode tratar esse erro em outros lugares se necessário
     }
     return logado
