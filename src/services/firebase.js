@@ -23,6 +23,7 @@ export async function logar(email, senha) {
       // Tente fazer login com o email e senha fornecidos
       await signInWithEmailAndPassword(auth, email, senha);
   alert("Login bem-sucedido!");
+   location.href='/cadastro'
     
 
     } catch (error) {
