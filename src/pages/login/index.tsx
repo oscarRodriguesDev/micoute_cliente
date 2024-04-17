@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Toaster, toast } from "sonner";
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
-import banner from "../../res/banner-gnt-login.png";
 import logo from '../../res/logo.png'
 import { logar, getState } from "@/services/firebase";
 
@@ -41,7 +40,7 @@ const Login: React.FC = () => {
 
         <Toaster position="top-right" richColors />
         <section className={styles.banner}>
-          <Image src={banner} alt="banner da tela de login" priority />
+         
         </section>
         <section className={styles.login}>
         
@@ -70,7 +69,7 @@ const Login: React.FC = () => {
               <button type="submit">Entrar</button>
             </form>
             <div  className={styles.register}>
-              <a href='/acessoCreate'>Primeiro Acesso</a>
+              <a href='/acessCreate'>Primeiro Acesso</a>
               <a href='#'>Esqueceu a Senha</a>
             </div>
           </div>

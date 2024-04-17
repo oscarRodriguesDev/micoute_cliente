@@ -17,7 +17,7 @@ e obrigatorio que o sistema se lembre dele
 
 //landing page da solução, com botão para redirecionar para login
 
-//o usuaario só pode ter acesso a tela dos testes caso esteja cadastrado no sistema, caso não esteja ele 
+//O usuaario só pode ter acesso a tela dos testes caso esteja cadastrado no sistema, caso não esteja ele 
 deve visualizar uma pagina de erros, dessa forma tambem impeço o caminho de volta pelas paginas navegadas
 
 //começar a pensar nas telas dashboards de comparação de fit cultural entre candidatos e empresas

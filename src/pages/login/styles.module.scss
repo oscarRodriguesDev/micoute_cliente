@@ -3,11 +3,15 @@
     flex-direction: row;
     padding: 0;
     height: 100vh;
-    background-color: #fff;
+    background-image: (url(../../res/banner-login.png));
+       background-repeat: no-repeat;
+       background-size: cover;
+       background-position:center;
    
 
     .banner {
-        overflow: hidden;
+       overflow: hidden;
+       width:100%;
 
         img {
             height: 100vh;
@@ -22,6 +26,10 @@
         align-items: center;
         width: 55vw;
         overflow: hidden;
+        background-color: #ffffffd9;
+        width:80%;
+     
+       
 
         .register {
           display: flex;
