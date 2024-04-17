@@ -15,7 +15,7 @@ e obrigatorio que o sistema se lembre dele
 
 //politica de uso de dados do site
 
-//landing page da solução, com opção de login
+//landing page da solução, com botão para redirecionar para login
 
 //o usuaario só pode ter acesso a tela dos testes caso esteja cadastrado no sistema, caso não esteja ele 
 deve visualizar uma pagina de erros, dessa forma tambem impeço o caminho de volta pelas paginas navegadas
@@ -24,11 +24,17 @@ deve visualizar uma pagina de erros, dessa forma tambem impeço o caminho de vol
 
 //modificar todos os alertas para o toast
 
+//verificar porque o toast não esta funcionando na minha maquina
+
 //melhorar a segurança do acesso ao banco de dados, arquivo .env para a chave do firebase e outras que necessitar
 
 //mexer na api para criação de perfil do usuario
 
-//
+//preciso reconhecer o usuario logado 
+
+//preciso categorizar usuarios para que alguns possam ter acesso ao painel de dashboard
+
+
 
 
 
